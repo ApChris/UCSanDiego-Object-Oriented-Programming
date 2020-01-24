@@ -73,8 +73,8 @@ public class EarthquakeCityMap extends PApplet {
 	    //PointFeatures have a getLocation method
 	    List<PointFeature> earthquakes = ParseFeed.parseEarthquake(this, earthquakesURL);
 	    
-	    //TODO (Step 3): Add a loop here that calls createMarker (see below) 
-	    // to create a new SimplePointMarker for each PointFeature in 
+
+	    // create a new SimplePointMarker for each PointFeature in 
 	    // earthquakes.  Then add each new SimplePointMarker to the 
 	    // List markers (so that it will be added to the map in the line below)
 	    
@@ -83,59 +83,11 @@ public class EarthquakeCityMap extends PApplet {
 	    	PointFeature f = earthquakes.get(i);
 	    	markers.add(createMarker(f));
 	    }
-	    
-	    if (earthquakes.size() > 0) {
-	    	PointFeature f = earthquakes.get(0);
-	    	System.out.println(f.getProperties());
-	    	Object magObj = f.getProperty("magnitude");
-	    	float mag = Float.parseFloat(magObj.toString());
-	    	// PointFeatures also have a getLocation method
-	    }
-	    
-	    // Colors of 3 different types of earthquakes
-	
-	    
-//	    for(Marker mark: markers)
-//	    {
-//	    	// Get magnitude of every mark
-//	    	float magnitude = (float) mark.getProperty("magnitude");
-//	    	
-//	    	// Minor earthquakes
-//	    	if(magnitude < 4.0)
-//	    	{
-//	    		mark.setColor(blue);
-//	    		((SimplePointMarker) mark).setRadius(5);
-//	    	}
-//	    	else
-//	    	{
-//	    		// Light earthquakes
-//	    		if(magnitude < 5)
-//	    		{
-//	    			mark.setColor(yellow);
-//	    			((SimplePointMarker) mark).setRadius(10);
-//	    		}
-//	    		// Moderate and higher earthquakes
-//	    		else
-//	    		{
-//	    			mark.setColor(red);
-//	    			((SimplePointMarker) mark).setRadius(15);
-//	    		}
-//	    	}
-//	    }
-	    // Add the markers to the map so that they are displayed
+	  // Add the markers to the map so that they are displayed
 	    map.addMarkers(markers);
 	}
 		
-	/* createMarker: A suggested helper method that takes in an earthquake 
-	 * feature and returns a SimplePointMarker for that earthquake
-	 * 
-	 * In step 3 You can use this method as-is.  Call it from a loop in the 
-	 * setp method.  
-	 * 
-	 * TODO (Step 4): Add code to this method so that it adds the proper 
-	 * styling to each marker based on the magnitude of the earthquake.  
-	*/
-	
+
 	private SimplePointMarker createMarker(PointFeature feature)
 	{  
 		// To print all of the features in a PointFeature (so you can see what they are)
@@ -184,15 +136,13 @@ public class EarthquakeCityMap extends PApplet {
 	    return marker;
 	}
 	
-	public void draw() {
+	public void draw() 
+	{
 	    background(10);
 	    map.draw();
 	    addKey();
 	}
 
-
-	// helper method to draw key in GUI
-	// TODO: Implement this method to draw the key
 	private void addKey() 
 	{	
 
