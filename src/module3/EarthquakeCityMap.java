@@ -24,7 +24,7 @@ import parsing.ParseFeed;
 /** EarthquakeCityMap
  * An application with an interactive map displaying earthquake data.
  * Author: UC San Diego Intermediate Software Development MOOC team
- * @author Your name here
+ * @author Christoforos Apostolopoulos
  * Date: July 17, 2015
  * */
 public class EarthquakeCityMap extends PApplet {
@@ -78,7 +78,50 @@ public class EarthquakeCityMap extends PApplet {
 	    // earthquakes.  Then add each new SimplePointMarker to the 
 	    // List markers (so that it will be added to the map in the line below)
 	    
+	    for(int i = 0; i < earthquakes.size(); i++)
+	    {
+	    	PointFeature f = earthquakes.get(i);
+	    	markers.add(createMarker(f));
+	    }
 	    
+	    if (earthquakes.size() > 0) {
+	    	PointFeature f = earthquakes.get(0);
+	    	System.out.println(f.getProperties());
+	    	Object magObj = f.getProperty("magnitude");
+	    	float mag = Float.parseFloat(magObj.toString());
+	    	// PointFeatures also have a getLocation method
+	    }
+	    
+	    // Colors of 3 different types of earthquakes
+	
+	    
+//	    for(Marker mark: markers)
+//	    {
+//	    	// Get magnitude of every mark
+//	    	float magnitude = (float) mark.getProperty("magnitude");
+//	    	
+//	    	// Minor earthquakes
+//	    	if(magnitude < 4.0)
+//	    	{
+//	    		mark.setColor(blue);
+//	    		((SimplePointMarker) mark).setRadius(5);
+//	    	}
+//	    	else
+//	    	{
+//	    		// Light earthquakes
+//	    		if(magnitude < 5)
+//	    		{
+//	    			mark.setColor(yellow);
+//	    			((SimplePointMarker) mark).setRadius(10);
+//	    		}
+//	    		// Moderate and higher earthquakes
+//	    		else
+//	    		{
+//	    			mark.setColor(red);
+//	    			((SimplePointMarker) mark).setRadius(15);
+//	    		}
+//	    	}
+//	    }
 	    // Add the markers to the map so that they are displayed
 	    map.addMarkers(markers);
 	}
@@ -92,6 +135,7 @@ public class EarthquakeCityMap extends PApplet {
 	 * TODO (Step 4): Add code to this method so that it adds the proper 
 	 * styling to each marker based on the magnitude of the earthquake.  
 	*/
+	
 	private SimplePointMarker createMarker(PointFeature feature)
 	{  
 		// To print all of the features in a PointFeature (so you can see what they are)
@@ -107,16 +151,34 @@ public class EarthquakeCityMap extends PApplet {
 		
 		// Here is an example of how to use Processing's color method to generate 
 	    // an int that represents the color yellow.  
-	    int yellow = color(255, 255, 0);
+	    int red = color(255,0,0);
+	    int yellow = color(255,255,0);
+	    int blue = color(0,0,255);
 		
-		// TODO (Step 4): Add code below to style the marker's size and color 
-	    // according to the magnitude of the earthquake.  
-	    // Don't forget about the constants THRESHOLD_MODERATE and 
-	    // THRESHOLD_LIGHT, which are declared above.
-	    // Rather than comparing the magnitude to a number directly, compare 
-	    // the magnitude to these variables (and change their value in the code 
-	    // above if you want to change what you mean by "moderate" and "light")
-	    
+
+	    float magnitude = (float) feature.getProperty("magnitude");
+    	
+    	// Minor earthquakes
+    	if(magnitude < 4.0)
+    	{
+    		marker.setColor(blue);
+    		((SimplePointMarker) marker).setRadius(5);
+    	}
+    	else
+    	{
+    		// Light earthquakes
+    		if(magnitude < 5)
+    		{
+    			marker.setColor(yellow);
+    			((SimplePointMarker) marker).setRadius(10);
+    		}
+    		// Moderate and higher earthquakes
+    		else
+    		{
+    			marker.setColor(red);
+    			((SimplePointMarker) marker).setRadius(15);
+    		}
+    	}
 	    
 	    // Finally return the marker
 	    return marker;
@@ -133,7 +195,30 @@ public class EarthquakeCityMap extends PApplet {
 	// TODO: Implement this method to draw the key
 	private void addKey() 
 	{	
-		// Remember you can use Processing's graphics methods here
-	
+
+		fill(153);
+		rect(10, 250, 150, 150);
+		textSize(18);
+		// 
+		fill(color(255,255,255));
+		text("Properties", 15, 270);
+		
+		// Red 
+		fill(color(255,0,0));
+		ellipse(30, 290, 15, 15);
+		textSize(12);
+		text("Greater than 5.0 magnitude", 50, 290);
+		
+		// Yellow
+		fill(color(255, 255, 0));
+		ellipse(30, 330, 10, 10);
+		textSize(12);
+		text("Greater than 4.0 magnitude", 50, 330);
+		
+		// Blue
+		fill(color(0,0,255));
+		ellipse(30, 360, 5, 5);
+		textSize(12);
+		text("Less than 4.0 magnitude", 35, 360);
 	}
 }
