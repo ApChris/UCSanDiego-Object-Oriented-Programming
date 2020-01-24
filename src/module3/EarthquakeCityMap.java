@@ -157,18 +157,18 @@ public class EarthquakeCityMap extends PApplet {
 		fill(color(255,0,0));
 		ellipse(30, 290, 15, 15);
 		textSize(12);
-		text("Greater than 5.0 magnitude", 50, 290);
+		text("Greater than 5.0 mag", 50, 290);
 		
 		// Yellow
 		fill(color(255, 255, 0));
 		ellipse(30, 330, 10, 10);
 		textSize(12);
-		text("Greater than 4.0 magnitude", 50, 330);
+		text("Greater than 4.0 mag", 50, 330);
 		
 		// Blue
 		fill(color(0,0,255));
 		ellipse(30, 360, 5, 5);
 		textSize(12);
-		text("Less than 4.0 magnitude", 35, 360);
+		text("Less than 4.0 mag", 35, 360);
 	}
 }
