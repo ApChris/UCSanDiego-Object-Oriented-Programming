@@ -37,7 +37,7 @@ public abstract class EarthquakeMarker extends SimplePointMarker
 	public static final float THRESHOLD_DEEP = 300;
 
 	// ADD constants for colors
-
+	
 	
 	// abstract method implemented in derived classes
 	public abstract void drawEarthquake(PGraphics pg, float x, float y);
@@ -69,6 +69,26 @@ public abstract class EarthquakeMarker extends SimplePointMarker
 		
 		// OPTIONAL TODO: draw X over marker if within past day		
 		
+		if ("Past Day".equals(getStringProperty("age"))) 
+		{
+			float magnitude = getMagnitude();
+
+			if (this instanceof OceanQuakeMarker) 
+			{
+				x = x + magnitude;
+				y = y + magnitude;
+
+				magnitude = magnitude * 1.4f;
+
+				pg.line(x - magnitude, y - magnitude, x + magnitude, y + magnitude);
+				pg.line(x + magnitude, y - magnitude, x - magnitude, y + magnitude);
+			} 
+			else 
+			{
+				pg.line(x - magnitude, y - magnitude, x + magnitude, y + magnitude);
+				pg.line(x + magnitude, y - magnitude, x - magnitude, y + magnitude);
+			}
+		}
 		// reset to previous styling
 		pg.popStyle();
 		
@@ -79,8 +99,22 @@ public abstract class EarthquakeMarker extends SimplePointMarker
 	// We suggest: Deep = red, intermediate = blue, shallow = yellow
 	// But this is up to you, of course.
 	// You might find the getters below helpful.
-	private void colorDetermine(PGraphics pg) {
-		//TODO: Implement this method
+	private void colorDetermine(PGraphics pg) 
+	{
+		float depth = getDepth();
+
+		if (depth < THRESHOLD_INTERMEDIATE) 
+		{
+			pg.fill(255, 255, 0);
+		} 
+		else if (depth < THRESHOLD_DEEP) 
+		{
+			pg.fill(0, 0, 255);
+		} 
+		else
+		{
+			pg.fill(255, 0, 0);
+		}
 	}
 	
 	
