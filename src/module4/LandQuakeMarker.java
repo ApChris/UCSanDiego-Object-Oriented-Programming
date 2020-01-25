@@ -3,38 +3,31 @@ package module4;
 import de.fhpotsdam.unfolding.data.PointFeature;
 import processing.core.PGraphics;
 
-/** Implements a visual marker for land earthquakes on an earthquake map
+/** Implements a visual marker for ocean earthquakes on an earthquake map
  * 
  * @author UC San Diego Intermediate Software Development MOOC team
  * @author Your name here
  *
  */
-public class LandQuakeMarker extends EarthquakeMarker {
+public class OceanQuakeMarker extends EarthquakeMarker {
 	
-	
-	public LandQuakeMarker(PointFeature quake) {
-		
-		// calling EarthquakeMarker constructor
+	public OceanQuakeMarker(PointFeature quake) {
 		super(quake);
 		
 		// setting field in earthquake marker
-		isOnLand = true;
+		isOnLand = false;
 	}
-
+	
 
 	@Override
 	public void drawEarthquake(PGraphics pg, float x, float y) 
 	{
-		pg.ellipse(x, y, getMagnitude() * 2, getMagnitude() * 2);
+		pg.rect(x, y, getMagnitude() * 2, getMagnitude() * 2);
+		
 	}
 	
 
-	// Get the country the earthquake is in
-	public String getCountry() {
-		return (String) getProperty("country");
-	}
 
+	
 
-
-		
 }
