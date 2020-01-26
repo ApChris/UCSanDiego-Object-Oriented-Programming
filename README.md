@@ -1,5 +1,4 @@
 
-Object Oriented Programming in Java,  University of California, San Diego 
 
 <h2 id="UCSanDiego-Object-Oriented-Programming">UCSanDiego-Object-Oriented-Programming</h2>
 <p>Object Oriented Programming in Java,  University of California, San Diego .</p>
