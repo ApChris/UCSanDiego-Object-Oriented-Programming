@@ -50,6 +50,7 @@ public class EarthquakeCityMap extends PApplet {
 	// The map
 	private UnfoldingMap map;
 	
+
 	// Markers for each city
 	private List<Marker> cityMarkers;
 	// Markers for each earthquake
@@ -145,7 +146,21 @@ public class EarthquakeCityMap extends PApplet {
 	// 
 	private void selectMarkerIfHover(List<Marker> markers)
 	{
-		// TODO: Implement this method
+		if (lastSelected != null) 
+		{
+			return;
+		}
+		
+		for(Marker mark: markers)
+		{
+			CommonMarker commonMark = (CommonMarker) mark;
+			if(commonMark.isInside(map, mouseX, mouseY))
+			{
+				lastSelected = commonMark;
+				commonMark.setSelected(true);
+				return;
+			}
+		}
 	}
 	
 	/** The event handler for mouse clicks
@@ -154,13 +169,48 @@ public class EarthquakeCityMap extends PApplet {
 	 * where the city is in the threat circle
 	 */
 	@Override
-	public void mouseClicked()
-	{
-		// TODO: Implement this method
-		// Hint: You probably want a helper method or two to keep this code
-		// from getting too long/disorganized
+	public void mouseClicked() {
+		if (lastClicked != null) {
+			unhideMarkers();
+			lastClicked = null;
+		} else if (lastClicked == null) {
+			checkIfClicked();
+			if (lastClicked == null) {
+				checkIfClicked();
+			}
+		}
 	}
-	
+
+	/**
+	 * 
+	 */
+	private void checkIfClicked() {
+		if (lastClicked != null) {
+			return;
+		}
+
+		for (Marker marker : cityMarkers) {
+			if (!marker.isHidden() && marker.isInside(map, mouseX, mouseY)) {
+				lastClicked = (CommonMarker) marker;
+
+				for (Marker markerHide : cityMarkers) {
+					if (markerHide != lastClicked) {
+						markerHide.setHidden(true);
+					}
+				}
+
+				for (Marker markerHide : quakeMarkers) {
+					EarthquakeMarker earthquakeMarker = (EarthquakeMarker) markerHide;
+					if (earthquakeMarker.getDistanceTo(marker.getLocation()) > earthquakeMarker.threatCircle()) {
+						earthquakeMarker.setHidden(true);
+					}
+				}
+			}
+		}
+	}
+
+
+
 	
 	// loop over and unhide all markers
 	private void unhideMarkers() {
