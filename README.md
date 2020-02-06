@@ -1,6 +1,6 @@
 
 
-<h2 id="UCSanDiego-Object-Oriented-Programming">UCSanDiego-Object-Oriented-Programming!</h2>
+<h2 id="UCSanDiego-Object-Oriented-Programming">UCSanDiego-Object-Oriented-Programming</h2>
 <p>Object Oriented Programming in Java,  University of California, San Diego.</p>
 <p>Shows all the ocean and land quakes with their magnitude. Also if you select an oceanquake or landquake, it will appears all the airports that have been affected from current quake. </p>
 <br>
